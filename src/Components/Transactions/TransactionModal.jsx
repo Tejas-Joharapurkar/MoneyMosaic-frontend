@@ -17,7 +17,7 @@ const TransactionModal = () => {
         try {
             const date = new Date().getTime()
             const data = { category, amount, desc, date }
-            const response = await axios.patch(`http://localhost:5000/api/v1/expense/add/${user._id}/${month}`, data)
+            const response = await axios.patch(`https://moneymosaic-backend.onrender.com/api/v1/expense/add/${user._id}/${month}`, data)
             console.log("transaction successful");
             dispatch({ type: "UPDATE_EXPENSE", payload: { category, amount, desc, date, msg: "successfully created expense" } })
             console.log(response.data);

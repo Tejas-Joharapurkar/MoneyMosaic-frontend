@@ -21,7 +21,7 @@ const Home = () => {
             console.log("started");
             dispatch({ type: "FETCH_STARTED" })
             try {
-                const response = await axios.get(`http://localhost:5000/api/v1/expense/get/${user._id}/${month}`)
+                const response = await axios.get(`https://moneymosaic-backend.onrender.com/api/v1/expense/get/${user._id}/${month}`)
                 const { expenses, budget, currentbudget } = response.data.expense
                 const transaction = response.data.transaction
                 console.log(response.data);

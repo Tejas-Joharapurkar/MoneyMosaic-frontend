@@ -17,7 +17,7 @@ const Form = () => {
         try {
             const data = { budget, month, "expenses": list, "currentbudget": budget };
             console.log(data);
-            await axios.post(`http://localhost:5000/api/v1/expense/create/${user._id}`, data)
+            await axios.post(`https://moneymosaic-backend.onrender.com/api/v1/expense/create/${user._id}`, data)
             dispatch({ type: "CREATE_EXPENSE_MODEL", payload: { budget, list } })
         } catch (error) {
             console.log("somthing went wrong in create_model_function");

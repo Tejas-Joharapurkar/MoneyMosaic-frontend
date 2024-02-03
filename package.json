@@ -2,7 +2,7 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
-  "proxy": "http://localhost:5000/api/v1",
+  "proxy": "https://moneymosaic-backend.onrender.com",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -17,7 +17,7 @@ const Login = () => {
         e.preventDefault();
         dispatch({ type: "LOGIN_START" })
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/user/register", credentials);
+            const response = await axios.post("https://moneymosaic-backend.onrender.com/api/v1/user/register", credentials);
             dispatch({ type: "LOGIN_SUCCESS", payload: response.data })
             navigate('/')
         } catch (error) {
