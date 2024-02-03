@@ -1,0 +1,46 @@
+.modal-container {
+    width: 50%;
+    height: 50%;
+    outline: 2px solid yellow;
+    background: #2C303A;
+    border-radius: 0.25rem;
+}
+
+.form-modal-container {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    row-gap: 1rem;
+}
+
+.modal-fields {
+    /* outline: 2px solid red; */
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: 500;
+    letter-spacing: 0.15rem;
+}
+
+.button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+
+.button:hover {
+    border-color: #646cff;
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* .button:focus,
+.button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+} */

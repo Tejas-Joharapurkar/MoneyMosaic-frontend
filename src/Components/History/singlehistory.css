@@ -1,0 +1,40 @@
+/* singlehistory.css */
+.single-history {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: #f9f9f9; */
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.6);
+    }
+
+    .info {
+        display: flex;
+        flex-direction: row;
+    }
+
+    p {
+        margin: 5px;
+    }
+
+    .amount {
+        font-weight: bold;
+    }
+
+    /* Add more styling as needed */
+}
+
+.single-history:nth-child(even) {
+    background: #2C303A;
+    /* background-color: #f9f9f9; */
+}
+
+.single-history:nth-child(odd) {
+    background: #2C303A;
+    /* background-color: #f9f9f9; */
+}

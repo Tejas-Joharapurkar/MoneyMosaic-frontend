@@ -1,0 +1,63 @@
+.main-container {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 97vh;
+    background: url("./images/login.svg") no-repeat fixed;
+}
+
+.glass-container {
+    background: rgba(255, 255, 255, 0.2);
+    /* White glass tint effect */
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    /* Box shadow for black background */
+    backdrop-filter: blur(8px);
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+    margin-right: 8rem;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* White input background */
+    color: #333;
+    transition: background 0.3s ease-in-out;
+    /* Add transition for background */
+}
+
+.input-container input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 1);
+    /* White input background on focus */
+}
+
+.glass-container button {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

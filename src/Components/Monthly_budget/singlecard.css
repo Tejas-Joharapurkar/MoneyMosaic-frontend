@@ -1,0 +1,48 @@
+/* singlecard.css */
+
+.singlecard-main-container {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    background: #353d55;
+    color: #fff;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    box-shadow: 1px 4px 8px rgba(255, 255, 255, 0.6);
+
+}
+
+.singlecard-main-container p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.singlecard-main-container::before,
+.singlecard-main-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #4e5a7f, #2c3e50);
+    z-index: -1;
+}
+
+.singlecard-main-container::before {
+    transform: rotate(2deg);
+}
+
+.singlecard-main-container::after {
+    transform: rotate(-3deg);
+}
+
+.singlecard-display span {
+    font-weight: 500;
+    letter-spacing: 0.15rem;
+    text-transform: capitalize;
+}

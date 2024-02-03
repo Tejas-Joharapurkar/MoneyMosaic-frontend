@@ -1,0 +1,14 @@
+.main-transaction-container {
+    width: 100%;
+    /* Set the desired width */
+    height: 100%;
+    /* Set the desired height */
+    overflow: scroll;
+    /* Add scroll bar when content exceeds container size */
+    background: #131417;
+    text-align: center;
+}
+
+.history-container {
+    margin: 10px;
+}
