@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import Form from '../Components/Form';
 import Sidebar from '../Components/Sidebar/Sidebar'
 import Expense from '../Components/Expense/Expense'
@@ -13,27 +13,29 @@ import { useGlobalUserContext } from '../Contexts/UserContext';
 import TransactionModal from '../Components/Transactions/TransactionModal';
 
 const Home = () => {
+    const url = 'http://localhost:8000/api/v1/expense/get/'
+    // https://moneymosaic-backend.onrender.com/api/v1/expense/get/
     const { user, dispatch: userdispatch } = useGlobalUserContext();
     const { expense, loading, showModal, toggle, month, dispatch } = useGlobalDataContext();
-    useEffect(() => {
-        dispatch({ type: "FETCH_STARTED" })
-        const fetchdata = async () => {
-            console.log("started");
-            dispatch({ type: "FETCH_STARTED" })
-            try {
-                const response = await axios.get(`https://moneymosaic-backend.onrender.com/api/v1/expense/get/${user._id}/${month}`)
-                const { expenses, budget, currentbudget } = response.data.expense
-                const transaction = response.data.transaction
-                console.log(response.data);
-                dispatch({ type: "INITIAL_LOAD", payload: { expenses, budget, currentbudget, transaction } })
-                console.log("dispatched");
-            } catch (error) {
-                console.log(error);
-                dispatch({ type: "ERROR_FETCH" })
-            }
-        }
-        fetchdata()
-    }, [dispatch, user, userdispatch])
+    // useLayoutEffect(() => {
+    //     dispatch({ type: "FETCH_STARTED" })
+    //     const fetchdata = async () => {
+    //         console.log("started");
+    //         dispatch({ type: "FETCH_STARTED" })
+    //         try {
+    //             const response = await axios.get(`${url}${user._id}/${month}`)
+    //             const { expenses, budget, currentbudget } = response.data.expense
+    //             const transaction = response.data.transaction
+    //             console.log(response.data);
+    //             dispatch({ type: "INITIAL_LOAD", payload: { expenses, budget, currentbudget, transaction } })
+    //             console.log("dispatched");
+    //         } catch (error) {
+    //             console.log(error);
+    //             dispatch({ type: "ERROR_FETCH" })
+    //         }
+    //     }
+    //     fetchdata()
+    // }, [dispatch, user, userdispatch])
     return (
         <div className='home-container'>
             {loading ? (
@@ -58,7 +60,6 @@ const Home = () => {
                         </div>
                         <div className="bottom">
                             <div className="single-data-container" style={{ textAlign: 'center' }}>
-                                <h2>CategoryCurrentAmountBarChart</h2>
                                 <Graph />
                             </div>
                             <div className="history-data-container" style={{ overflow: 'auto', width: '100%', height: '100%' }}>

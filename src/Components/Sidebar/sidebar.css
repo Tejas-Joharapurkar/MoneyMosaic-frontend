@@ -1,34 +1,96 @@
 .main-sidebar-container {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    width: 60%;
+    /* display: grid;
+    grid-template-rows: 2fr 6fr 1fr;
+    row-gap: 40px;
+    padding: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
-    /* outline: 2px solid white; */
-    transition: width 1s;
-    background: #2C303A;
-    border-radius: 0.25rem;
+    padding: 30px 0;
 }
 
-.main-sidebar-container:hover {
+.logo {
+    margin-left: 10px;
+}
+
+.logoHeading {
+    border: 0.1rem solid #fff;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    animation: pulsate 1.5s infinite alternate;
+    padding: 0.2em;
+    color: #fff;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #bc13fe,
+        0 0 82px #bc13fe,
+        0 0 92px #bc13fe,
+        0 0 102px #bc13fe,
+        0 0 151px #bc13fe;
+
+    box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #fff,
+        0 0 2rem #bc13fe,
+        0 0 0.8rem #bc13fe,
+        0 0 2.8rem #bc13fe,
+        inset 0 0 1.3rem #bc13fe;
+}
+
+@keyframes pulsate {
+    100% {
+        text-shadow:
+            0 0 4px #fff,
+            0 0 11px #fff,
+            0 0 19px #fff,
+            0 0 40px #bc13fe,
+            0 0 80px #bc13fe,
+            0 0 90px #bc13fe,
+            0 0 100px #bc13fe,
+            0 0 150px #bc13fe;
+    }
+
+    0% {
+        text-shadow:
+            0 0 2px #fff,
+            0 0 4px #fff,
+            0 0 6px #fff,
+            0 0 10px #bc13fe,
+            0 0 45px #bc13fe,
+            0 0 55px #bc13fe,
+            0 0 70px #bc13fe,
+            0 0 80px #bc13fe;
+    }
+
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    /* border: 2px solid white; */
+    height: 20rem;
+}
+
+.links {
+    background: transparent;
+    border: none;
+    font-size: large;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    /* border: 2px solid white; */
+    padding: 10px;
     width: 100%;
+    /* border-radius: 10px; */
 }
 
-.sidebar-button-container {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    place-content: center;
-}
-
-.sidebar-button-container button {
-    width: fit-content;
-    height: 1rem;
-}
-
-.main-sidebar-container:hover+.sidebar-button-container span {
-    color: white;
-    visibility: visible;
-}
-
-.sidebar-button-container span {
-    visibility: hidden;
+.links:hover {
+    transition: all 1s ease-in-out;
+    transform-origin: right center;
+    background: #404040;
+    border-radius: 10px;
 }

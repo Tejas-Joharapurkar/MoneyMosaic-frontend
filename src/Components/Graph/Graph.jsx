@@ -7,8 +7,9 @@ import CategoryCurrentAmountBarChart from './CategoryCurrentAmountBarChart'
 
 const Graph = () => {
     return (
-        <div style={{ width: '100%', height: '100%', display: 'grid', placeContent: 'center' }}>
+        <div className='graph-container '>
             {/* <ExpensesPieChart /> */}
+            <h2>CategoryCurrentAmountBarChart</h2>
             <CategoryCurrentAmountBarChart />
             {/* <MonthlyBudgetChart /> */}
             {/* <BudgetVsExpensesLineChart /> */}

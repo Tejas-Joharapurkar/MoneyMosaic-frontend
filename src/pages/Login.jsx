@@ -4,9 +4,12 @@ import './login.css';
 import { useNavigate } from 'react-router';
 import { useGlobalUserContext } from '../Contexts/UserContext';
 const Login = () => {
+    const url = 'http://localhost:8000/api/v1/user/auth/'
+    // https://moneymosaic-backend.onrender.com/api/v1/user/register
     const { error, dispatch } = useGlobalUserContext()
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({});
+    const [toggle, setToggle] = useState(false)
     const handleChange = (e) => {
         setCredentials((prev) => {
             return { ...prev, [e.target.id]: e.target.value };
@@ -16,33 +19,71 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch({ type: "LOGIN_START" })
+        let response = null;
         try {
-            const response = await axios.post("https://moneymosaic-backend.onrender.com/api/v1/user/register", credentials);
+            console.log(credentials);
+            if (toggle) {
+                response = await axios.post(`${url}register`, credentials)
+            } else {
+                response = await axios.post(`${url}login`, credentials);
+            }
             dispatch({ type: "LOGIN_SUCCESS", payload: response.data })
             navigate('/')
         } catch (error) {
-            console.log((error));
-            dispatch({ type: "LOGIN_FAILURE", payload: "error" })
+            console.log((error.message));
+            dispatch({ type: "LOGIN_FAILURE", payload: `${error.message}` })
             // Handle the error, e.g., display an error message to the user
         }
     };
 
     return (
-        <div className="main-container">
-            <form className="glass-container">
-                <h3>Log in to monitor your financial data.</h3>
-                <div className="input-container">
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" id="name" placeholder="Enter your username" onChange={(e) => handleChange(e)} />
-                </div>
+        <div className="mainContainer">
+            <div className="loginContainer">
+                <div className="login" style={{ background: toggle ? '#898980' : '#c5dac1 ' }}>
+                    {toggle ?
+                        <div className='contentSignup'>
+                            <h1>hi there!</h1>
+                            <p className='about'>already have a account, login to monitor your financial data</p>
+                            <button className='signupButton' onClick={() => setToggle
+                                (!toggle)}>login</button>
+                        </div> :
+                        <div className='loginForm'>
+                            <h3>Login, to monitor your financial data</h3>
+                            <div className="input-container">
+                                <label htmlFor="username">Username</label>
+                                <input type="text" id="username" placeholder="Enter your username" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <div className="input-container">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" placeholder="Enter your password" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <button className="loginButton" onClick={(e) => handleSubmit(e)}>Login</button>
 
-                <div className="input-container">
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" placeholder="Enter your password" onChange={(e) => handleChange(e)} />
+                        </div>}
                 </div>
-                <button onClick={(e) => handleSubmit(e)}>Login/register</button>
-            </form>
-            {error && <h2>{error}</h2>}
+                <div className="signup" style={{ background: !toggle ? '#898980' : '#c5dac1 ', borderTopLeftRadius: toggle ? '5rem' : '0', borderBottomLeftRadius: toggle ? '5rem' : '0' }}>
+                    {!toggle ?
+                        <div className='contentSignup'>
+                            <h1>hi there!</h1>
+                            <p className='about'>Turn spending into strategy – Our platform transforms everyday expenses into actionable insights, equipping you with the tools to manage, understand, and thrive financially.</p>
+                            <button className='signupButton' onClick={() => setToggle
+                                (!toggle)}>Sign up</button>
+                        </div> :
+                        <div className='loginForm'>
+                            <h3 style={{ color: toggle ? 'black' : '#c5dac1 ', textTransform: 'capitalize', fontSize: '1.3rem' }}>sign up</h3>
+                            <div className="input-container">
+                                <label htmlFor="username" style={{ color: toggle ? 'black' : '#c5dac1 ' }}>Username</label>
+                                <input type="text" id="username" placeholder="Enter your username" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <div className="input-container">
+                                <label htmlFor="password" style={{ color: toggle ? 'black' : '#c5dac1 ' }}>Password</label>
+                                <input type="password" id="password" placeholder="Enter your password" onChange={(e) => handleChange(e)} />
+                            </div>
+                            <button className="signupButton" onClick={(e) => handleSubmit(e)} style={{ background: toggle ? '#898980' : '#c5dac1 ' }}>sign up</button>
+
+                        </div>}
+                </div>
+            </div>
         </div>
     );
 };

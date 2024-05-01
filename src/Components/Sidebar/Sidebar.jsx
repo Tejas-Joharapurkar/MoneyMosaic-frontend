@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './sidebar.css'
 import { useGlobalUserContext } from '../../Contexts/UserContext'
 import { useGlobalDataContext } from '../../Contexts/DataContext';
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaHome, FaSignOutAlt } from "react-icons/fa";
+import { MdDashboardCustomize } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 const Sidebar = () => {
+    const navigate = useNavigate()
     const { user, dispatch } = useGlobalUserContext()
     const { toggle } = useGlobalDataContext()
     const logout = () => {
@@ -12,16 +15,25 @@ const Sidebar = () => {
     }
     return (
         <div className='main-sidebar-container'>
-            <div className="name">
-                <h3>{user.name}</h3>
+            <div className="logo">
+                <h2 className='logoHeading'>MMOSAIC</h2>
             </div>
-            <div className="sidebar-button-container">
-                <button onClick={toggle}>Add </button>
-                <button>Dash</button>
+            <div className="options">
+                <h3>#Menu</h3>
+                <button className='links' onClick={() => navigate('/newhome')}>
+                    <FaHome />
+                    Home
+                </button>
+                <button className='links' onClick={() => navigate('/dashboard')}>
+                    <MdDashboardCustomize />
+                    DashBoard
+                </button>
+                <button onClick={toggle} className='links'>Add Expense</button>
             </div>
             <div className="logout">
-                <button>
-                    <FaSignOutAlt onClick={() => logout()} />
+                <button onClick={logout} className='links'>
+                    <FaSignOutAlt />
+                    Logout
                 </button>
             </div>
         </div>

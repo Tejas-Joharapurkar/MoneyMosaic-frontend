@@ -1,46 +1,79 @@
-.modal-container {
-    width: 50%;
-    height: 50%;
-    outline: 2px solid yellow;
-    background: #2C303A;
-    border-radius: 0.25rem;
+.transactionContainer {
+    width: 30%;
+    height: 40%;
+    padding: 1%;
+    background: #181818;
+    position: relative;
+    box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #fff,
+        0 0 2rem #5271ff,
+        0 0 0.8rem #5271ff,
+        0 0 2.8rem #5271ff,
+        inset 0 0 1.3rem #5271ff;
+    border-radius: 10px;
+    min-height: fit-content;
+    overflow: hidden;
+
+}
+
+.close {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
 }
 
 .form-modal-container {
-    display: grid;
-    grid-template-rows: auto auto auto;
-    row-gap: 1rem;
+    /* margin-top: 1rem; */
+    margin: auto;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    /* border: 2px solid wheat; */
+    /* background: #404040; */
+    border-radius: 10px;
 }
 
 .modal-fields {
-    /* outline: 2px solid red; */
-    width: 50%;
-    margin: auto;
     display: flex;
-    justify-content: space-evenly;
-    font-weight: 500;
-    letter-spacing: 0.15rem;
+    width: 100%;
+    height: 2rem;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+    /* border: 2px solid white; */
+}
+
+.modal-fields label {
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+}
+
+.modal-fields input {
+    height: 2rem;
+    background: none;
+    /* border: none; */
+    border: 1px solid white;
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.modal-fields select {
+    height: 2rem;
+    /* background: none;
+    border: none; */
+    font-size: 1rem;
+    /* padding: 10px; */
 }
 
 .button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
+    margin-bottom: 10px;
+    width: 60%;
 }
-
-
-.button:hover {
-    border-color: #646cff;
-    outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* .button:focus,
-.button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-} */

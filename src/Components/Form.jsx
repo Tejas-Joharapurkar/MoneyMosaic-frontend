@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Category from './Category';
 import Loading from './Loading';
 import axios from 'axios';
@@ -6,9 +6,13 @@ import { useGlobalDataContext } from '../Contexts/DataContext'
 import { useGlobalUserContext } from '../Contexts/UserContext'
 import './form.css'
 const Form = () => {
+    const url = 'http://localhost:8000/api/v1/expense/create/'
+    // const url = "https://moneymosaic-backend.onrender.com/api/v1/expense/create/"
     const { dispatch, month, loading } = useGlobalDataContext()
     const { user } = useGlobalUserContext()
     const [budget, setbudget] = useState(0)
+    const [error, setError] = useState(false)
+    const [tempBudget, setTempBudget] = useState(0)
     const [category, setcategory] = useState("");
     const [amount, setamount] = useState(0);
     const [list, setlist] = useState([]);
@@ -17,7 +21,7 @@ const Form = () => {
         try {
             const data = { budget, month, "expenses": list, "currentbudget": budget };
             console.log(data);
-            await axios.post(`https://moneymosaic-backend.onrender.com/api/v1/expense/create/${user._id}`, data)
+            await axios.post(`${url}${user._id}`, data)
             dispatch({ type: "CREATE_EXPENSE_MODEL", payload: { budget, list } })
         } catch (error) {
             console.log("somthing went wrong in create_model_function");
@@ -30,11 +34,25 @@ const Form = () => {
     }
     // console.log(expensedata);
     const addCategory = (category, amount) => {
-        const newlist = [...list, { category, amount, "currentamount": amount }]
-        setlist(newlist)
+        if (tempBudget - amount < 0) {
+            setError(true)
+        } else {
+            setTempBudget(tempBudget - amount);
+            console.log(tempBudget);
+            const newlist = [...list, { category, amount, "currentamount": amount, _id: new Date().getTime().toString() }]
+            setlist(newlist)
+        }
         setcategory("")
         setamount(0)
         // console.log(list);
+    }
+    if (error) {
+        const timeout = setTimeout(() => {
+            setError(false)
+            return () => {
+                clearTimeout(timeout)
+            }
+        }, 3000);
     }
     if (loading) {
         return (
@@ -44,12 +62,13 @@ const Form = () => {
     return (
         <div className='main-main'>
             <h1>Please Create Your Montly Expense Modal</h1>
+            {error && <div className='errorBox'>budget Exceded</div>}
             <div className='form-main-container'>
                 <div className="form-container">
                     <div className="form">
                         <div className="input-field">
                             <label htmlFor="budget">Monthly Budget</label>
-                            <input type="number" id='budget' value={budget} className="input" onChange={(e) => { setbudget(e.target.value) }} />
+                            <input type="number" id='budget' value={budget} className="input" onChange={(e) => { setbudget(e.target.value), setTempBudget(e.target.value) }} />
                         </div>
                         <div className="input-field">
                             <label htmlFor="category">Add Category</label>
@@ -66,7 +85,7 @@ const Form = () => {
                         {
                             list.map((single, index) => {
                                 return (
-                                    <div key={index} className='single-list-category'>
+                                    <div key={single._id} className='single-list-category'>
                                         <Category single={single} index={index} list={list} setlist={setlist} />
                                     </div>
                                 )

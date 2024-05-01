@@ -9,7 +9,7 @@ const BudgetVsExpensesLineChart = () => {
     Chart.defaults.color = "#80ffdb";
     const { expense } = useGlobalDataContext()
     const budgets = expense.map((single) => {
-        return expense.amount
+        return single.amount
     })
     const labels = expense.map((single) => {
         return single.category
@@ -33,7 +33,8 @@ const BudgetVsExpensesLineChart = () => {
         ],
     };
 
-    return <Line data={data} />;
+    return <Line data={data} width={300}
+        height={300} />;
 };
 
 export default BudgetVsExpensesLineChart;

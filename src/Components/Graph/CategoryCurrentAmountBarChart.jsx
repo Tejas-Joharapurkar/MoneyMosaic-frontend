@@ -2,41 +2,48 @@
 
 import React from 'react';
 import { useGlobalDataContext } from '../../Contexts/DataContext'
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, BarController, BarElement } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { useGlobalUserContext } from '../../Contexts/UserContext'
+import {
+    BarChart,
+    Bar,
+    Cell,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ReferenceLine,
+    PieChart, Pie, Sector, Rectangle,
+    ResponsiveContainer,
+} from 'recharts'
 
 const CategoryCurrentAmountBarChart = () => {
-    Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, BarController, BarElement);
-    Chart.defaults.color = "#fca311";
-    const { expense } = useGlobalDataContext()
-    const data = {
-        labels: expense.map((expense) => expense.category),
-        datasets: [
-            {
-                label: 'Current Amount',
-                backgroundColor: '#80ffdb',
-                data: expense.map((expense) => expense.currentamount),
-            },
-        ],
-    };
-    const options = {
-        scales: {
-            x: {
-                grid: {
-                    color: 'rgba(255,0,0,0.4)',
-                    borderColor: 'red'
-                }
-            },
-            y: {
-                grid: {
-                    color: 'rgba(0,255,0,0.4)',
-                    borderColor: 'green'
-                }
-            }
-        }
-    };
-
-    return < Bar data={data} options={options} />
+    const { budget, currentbudget } = useGlobalDataContext()
+    const { user } = useGlobalDataContext()
+    const data = [{ name: "Monthly Budget", budget, currentbudget }]
+    return (
+        <ResponsiveContainer width="100%" height="90%">
+            <BarChart
+                data={data}
+            // margin={{
+            //     top: 30,
+            //     right: 30,
+            //     left: 20,
+            //     bottom: 5,
+            // }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <ReferenceLine y={0} stroke="#000" />
+                <Bar dataKey="currentbudget" fill="#9461fd" />
+                <Bar dataKey="budget" fill="#2dd9fe" />
+                {/* <Bar dataKey="balance" fill="#9461fd" />
+                <Bar dataKey="spend" fill="#2dd9fe" /> */}
+            </BarChart>
+        </ResponsiveContainer>
+    );
 };
-
 export default CategoryCurrentAmountBarChart;

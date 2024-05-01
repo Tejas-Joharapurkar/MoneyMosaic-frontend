@@ -1,14 +1,45 @@
-.main-transaction-container {
-    width: 100%;
-    /* Set the desired width */
-    height: 100%;
-    /* Set the desired height */
-    overflow: scroll;
-    /* Add scroll bar when content exceeds container size */
-    background: #131417;
-    text-align: center;
+.historyContainer {
+    background: #181818;
+    margin: 0 0 0 2%;
+    border-radius: 10px;
 }
 
-.history-container {
-    margin: 10px;
+.headings {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid #404040;
+    /* border-radius: 5px; */
+    width: 95%;
+    height: 3rem;
+    margin: auto;
+    margin-top: 10px;
+    place-items: center;
+}
+
+.historyDataContainer {
+
+    width: 95%;
+    height: 65%;
+    overflow: auto;
+    margin: auto;
+}
+
+.historyDataContainer::-webkit-scrollbar {
+    width: 5px;
+    /* Width of the scrollbar */
+}
+
+.historyDataContainer::-webkit-scrollbar-track {
+    background-color: #404040;
+    /* Track color */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Shadow to create a groove effect */
+}
+
+.historyDataContainer::-webkit-scrollbar-thumb {
+    background-color: #121212;
+    height: 4px;
+    /* Thumb color */
+    /* border-radius: 8px; */
+    /* Border radius of the thumb */
 }

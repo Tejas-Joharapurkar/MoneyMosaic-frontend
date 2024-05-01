@@ -2,16 +2,30 @@ import React, { useState } from 'react'
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import './category.css'
-const Category = ({ single, index, list, setlist }) => {
+const Category = ({ single, list, setlist }) => {
     const [currentcategory, setcurrentcategory] = useState(single.category)
     const [currentamount, setcurrentamount] = useState(single.amount)
     const [edit, setedit] = useState(false)
-    const Delete = (category) => {
-        const newlist = list.filter((item) => item.category !== category)
+    const Delete = (id) => {
+        const newlist = list.filter((item) => item._id !== id)
         setlist([...newlist])
     }
+    const editfunction = (id) => {
+        setlist((pre) => {
+            return pre.map((item) => {
+                if (item._id === id) {
+                    return { ...item, category: currentcategory, amount: currentamount };
+                } else {
+                    return item;
+                }
+            });
+        });
+        setedit(false);
+    };
+
+    console.log(list);
     return (
-        <div className="single-category" key={index}>
+        <div className="single-category">
             <div className="info">
                 <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', width: '100%', marginLeft: '0.5rem' }}>
                     <input type="text" id='category' value={currentcategory} readOnly={edit ? false : true} onChange={(e) => { setcurrentcategory(e.target.value) }} />
@@ -20,9 +34,9 @@ const Category = ({ single, index, list, setlist }) => {
                     <input type="number" id='amount' value={currentamount} readOnly={edit ? false : true} onChange={(e) => { setcurrentamount(e.target.value) }} />
                 </div>
             </div>
-            {edit ? <button>Done</button> :
+            {edit ? <button onClick={() => editfunction(single._id)}>Done</button> :
                 <div className="button-container">
-                    <button onClick={() => Delete(currentcategory)}><MdDeleteForever style={{ color: 'red' }} /></button>
+                    <button onClick={() => Delete(single._id)}><MdDeleteForever style={{ color: 'red' }} /></button>
                     <button onClick={() => { setedit(true) }}><FaEdit style={{ color: 'cyan' }} /></button>
                 </div>
             }

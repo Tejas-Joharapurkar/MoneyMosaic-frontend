@@ -48,7 +48,7 @@ const DataProvider = ({ children }) => {
     const toggle = () => {
         dispatch({ type: "TOGGLE_MODAL" })
     }
-    // console.log(state.transaction_history);
+    console.log(state.expense);
     return <DataContext.Provider
         value={{
             expense: state.expense,
