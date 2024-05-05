@@ -2,9 +2,12 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     /* outline: 2px solid red; */
-    height: 100%;
+    width: fit-content;
+    height: 4rem;
     column-gap: 1rem;
     max-width: fit-content;
+    background: #2C333A;
+    border-radius: 10px;
 }
 
 .info {

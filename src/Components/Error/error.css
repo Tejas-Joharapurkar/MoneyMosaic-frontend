@@ -1,0 +1,18 @@
+.errorContainer {
+    width: fit-content;
+    height: 3rem;
+    padding: 1rem;
+    letter-spacing: 0.1rem;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 2px solid #FF5161;
+    box-shadow: 0 0 25px 2.5px #D30302;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    transition: all 1s ease-in-out;
+    background: #101214;
+    z-index: 1990;
+}

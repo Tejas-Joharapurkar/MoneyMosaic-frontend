@@ -20,17 +20,17 @@ const TransactionModal = () => {
         console.log("transaction started");
         dispatch({ type: "FETCH_STARTED" })
         try {
-            const data = { category: category.category, amount, desc }
+            const data = { category: category.category, amount: parseInt(amount), desc }
             const response = await axios.patch(`${url}${user._id}/${month}`, data)
             console.log("transaction successful");
-            dispatch({ type: "UPDATE_EXPENSE", payload: { category: category.category, amount, desc, date: new Date().getDate(), msg: "successfully created expense" } })
             console.log(response.data);
+            dispatch({ type: "UPDATE_EXPENSE", payload: { data: response.data } })
         } catch (error) {
             console.log(error);
             dispatch({ type: "ERROR_FETCH", payload: error })
         }
     }
-    console.log(category);
+    // console.log(category);
     // if (loading) {
     //     return <Loading />;
     // }

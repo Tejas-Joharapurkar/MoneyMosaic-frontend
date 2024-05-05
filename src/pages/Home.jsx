@@ -67,17 +67,19 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    {showModal && (
-                        <div className='modal-overlay'>
-                            <div className='button'>
-                                <button onClick={toggle}>close</button>
+                    {
+                        showModal && (
+                            <div className='modal-overlay'>
+                                <div className='button'>
+                                    <button onClick={toggle}>close</button>
+                                </div>
+                                <TransactionModal />
                             </div>
-                            <TransactionModal />
-                        </div>
-                    )}
-                </div>
+                        )
+                    }
+                </div >
             )}
-        </div>
+        </div >
     );
 };
 

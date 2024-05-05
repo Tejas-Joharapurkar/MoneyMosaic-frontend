@@ -22,28 +22,30 @@ const CategoryCurrentAmountBarChart = () => {
     const { user } = useGlobalDataContext()
     const data = [{ name: "Monthly Budget", budget, currentbudget }]
     return (
-        <ResponsiveContainer width="100%" height="90%">
-            <BarChart
-                data={data}
-            // margin={{
-            //     top: 30,
-            //     right: 30,
-            //     left: 20,
-            //     bottom: 5,
-            // }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <ReferenceLine y={0} stroke="#000" />
-                <Bar dataKey="currentbudget" fill="#9461fd" />
-                <Bar dataKey="budget" fill="#2dd9fe" />
-                {/* <Bar dataKey="balance" fill="#9461fd" />
+        // <ResponsiveContainer width="100" height="90">
+        <BarChart
+            width={300}
+            height={200}
+            data={data}
+        // margin={{
+        //     top: 30,
+        //     right: 30,
+        //     left: 20,
+        //     bottom: 5,
+        // }}
+        >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <ReferenceLine y={0} stroke="#000" />
+            <Bar dataKey="currentbudget" fill="#9461fd" />
+            <Bar dataKey="budget" fill="#2dd9fe" />
+            {/* <Bar dataKey="balance" fill="#9461fd" />
                 <Bar dataKey="spend" fill="#2dd9fe" /> */}
-            </BarChart>
-        </ResponsiveContainer>
+        </BarChart>
+        // </ResponsiveContainer>
     );
 };
 export default CategoryCurrentAmountBarChart;

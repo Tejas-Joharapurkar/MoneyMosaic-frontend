@@ -25,7 +25,7 @@ const MonthlyBudget = () => {
                             }`}>
                             <h4 style={{ letterSpacing: '0.3rem', textTransform: 'capitalize', margin: '10px 0 5px 20px' }}>{single.category}</h4>
                             <h3 style={{ letterSpacing: '0.3rem', textTransform: 'capitalize', margin: '0 0 10px 20px' }}>{single.amount}</h3>
-                            <p style={{ letterSpacing: '0.3rem', textTransform: 'capitalize', margin: '0 0 0 20px' }}>Remaning: {single.amount - single.currentamount}</p>
+                            <p style={{ letterSpacing: '0.3rem', textTransform: 'capitalize', margin: '0 0 0 20px' }}>Remaning: {single.currentamount}</p>
                             <p style={{ color: `${colorPaletPer[(i + colorPaletPer.length) % colorPaletPer.length]}`, letterSpacing: '0.1rem', textTransform: 'capitalize', margin: '0 0 0 20px' }}>{((single.amount - single.currentamount) / single.amount) * 100}%</p>
                             <div className="percentageBox" style={{ width: '90%', height: '5%', background: '#404040', position: 'absolute', left: '10px', borderRadius: '10px', bottom: '10%' }}>
                                 <div className="completed" style={{ width: `${Math.min(((single.amount - single.currentamount) / single.amount) * 100, 100)}%`, height: "100%", background: `${neonColors[i]}`, borderRadius: '10px ', boxShadow: `0 0 25px 2.5px ${glowColors[i]}` }}>

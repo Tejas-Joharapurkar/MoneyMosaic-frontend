@@ -6,12 +6,9 @@ import Dashboard from './pages/Dashboard';
 import ProtectedRoutes from './Components/ProtectedRoutes';
 import NewHome from './pages/NewHome';
 import { DataProvider } from './Contexts/DataContext';
-import Testing from './Components/Testing';
-// import axios from 'axios';
-// import { useGlobalUserContext } from './Contexts/UserContext';
-// import MonthlyBudget from './Components/Monthly_budget/MonthlyBudget';
-// import Form from './Components/Form';
-// import Auth from './pages/Auth';
+import Form from './Components/Form';
+import FormProtectedroute from './Components/FormProtectedroute';
+
 
 const App = () => {
 
@@ -20,10 +17,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoutes />}>
-            <Route element={<Home />} path="/" exact />
+            {/* <Route element={<FormProtectedroute />}> */}
+            <Route element={<NewHome />} path="/" exact />
             <Route element={<Dashboard />} path="/dashboard" />
-            <Route element={<NewHome />} path="/newhome" />
-            <Route element={<Testing />} path='/testingcontext' />
+            {/* </Route> */}
+            <Route element={<Form />} path='/form' />
           </Route>
           <Route element={<Login />} path="/login" />
         </Routes>

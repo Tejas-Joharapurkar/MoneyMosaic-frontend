@@ -27,7 +27,7 @@ const History = () => {
             </div>
             <div className="historyDataContainer">
                 {
-                    transaction_history.map((single, i) => {
+                    transaction_history?.map((single, i) => {
                         return (
                             <SingleHistory single={single} key={i} />
                         )

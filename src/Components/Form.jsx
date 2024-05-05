@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import Category from './Category';
 import Loading from './Loading';
 import axios from 'axios';
 import { useGlobalDataContext } from '../Contexts/DataContext'
 import { useGlobalUserContext } from '../Contexts/UserContext'
+import Error from './Error/Error';
+import { useNavigate } from 'react-router-dom'
 import './form.css'
 const Form = () => {
+    const navigate = useNavigate()
     const url = 'http://localhost:8000/api/v1/expense/create/'
     // const url = "https://moneymosaic-backend.onrender.com/api/v1/expense/create/"
     const { dispatch, month, loading } = useGlobalDataContext()
@@ -16,6 +19,8 @@ const Form = () => {
     const [category, setcategory] = useState("");
     const [amount, setamount] = useState(0);
     const [list, setlist] = useState([]);
+    const [msg, setMsg] = useState("")
+
     const create_expense_model = async () => {
         dispatch({ type: "FETCH_STARTED" })
         try {
@@ -23,6 +28,8 @@ const Form = () => {
             console.log(data);
             await axios.post(`${url}${user._id}`, data)
             dispatch({ type: "CREATE_EXPENSE_MODEL", payload: { budget, list } })
+            navigate('/')
+
         } catch (error) {
             console.log("somthing went wrong in create_model_function");
             dispatch({ type: "ERROR_FETCH" })
@@ -30,11 +37,17 @@ const Form = () => {
     }
     const handlesubmit = async (e) => {
         e.preventDefault();
-        create_expense_model()
+        if (list.length <= 3) {
+            setMsg("Number of category should be grater that 3")
+            setError(true)
+        } else {
+            create_expense_model()
+        }
     }
     // console.log(expensedata);
     const addCategory = (category, amount) => {
         if (tempBudget - amount < 0) {
+            setMsg("Budget OverLoaded")
             setError(true)
         } else {
             setTempBudget(tempBudget - amount);
@@ -44,7 +57,6 @@ const Form = () => {
         }
         setcategory("")
         setamount(0)
-        // console.log(list);
     }
     if (error) {
         const timeout = setTimeout(() => {
@@ -60,41 +72,43 @@ const Form = () => {
         )
     }
     return (
-        <div className='main-main'>
-            <h1>Please Create Your Montly Expense Modal</h1>
-            {error && <div className='errorBox'>budget Exceded</div>}
-            <div className='form-main-container'>
-                <div className="form-container">
-                    <div className="form">
-                        <div className="input-field">
-                            <label htmlFor="budget">Monthly Budget</label>
-                            <input type="number" id='budget' value={budget} className="input" onChange={(e) => { setbudget(e.target.value), setTempBudget(e.target.value) }} />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="category">Add Category</label>
-                            <input type="text" id='category' value={category} onChange={(e) => { setcategory(e.target.value) }} />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="amount">Amount</label>
-                            <input type="number" id="amount" value={amount} onChange={(e) => { setamount(e.target.value) }} />
-                        </div>
-                        <button onClick={() => { addCategory(category, amount) }} style={{ width: '50%', margin: 'auto', marginBottom: '0.5rem' }}>Add</button>
-                        <button onClick={(e) => { handlesubmit(e) }}>Create Expense model</button>
+        <div className="formMainContainer">
+            {error && <Error msg={msg} />}
+            <div className="sideForm">
+                <h3># Create Budget Modal</h3>
+                <div className="form">
+                    <div className="input-field">
+                        <label htmlFor="budget">Monthly Budget:</label>
+                        <input type="number" id='budget' value={budget} className="input" onChange={(e) => { setbudget(parseInt(e.target.value)), setTempBudget(parseInt(e.target.value)) }} onWheel={(e) => ((e.target).blur())} />
                     </div>
-                    <div className="list-container">
-                        {
-                            list.map((single, index) => {
-                                return (
-                                    <div key={single._id} className='single-list-category'>
-                                        <Category single={single} index={index} list={list} setlist={setlist} />
-                                    </div>
-                                )
-                            })
-                        }
+                    <div className="input-field">
+                        <label htmlFor="category">Add Category:</label>
+                        <input type="text" id='category' value={category} onChange={(e) => { setcategory(e.target.value) }} />
                     </div>
+                    <div className="input-field">
+                        <label htmlFor="amount">Amount:</label>
+                        <input type="number" id="amount" value={amount} onChange={(e) => { setamount(parseInt(e.target.value)) }} onWheel={(e) => ((e.target).blur())} />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="balance">Balance:</label>
+                        <input type="number" id="balance" readOnly={true} value={tempBudget - amount} onWheel={(e) => ((e.target).blur())} />
+                    </div>
+                    <button className='addButton' onClick={() => { addCategory(category, amount) }} >Add Category</button>
+                    <button className='createButton' onClick={(e) => { handlesubmit(e) }}>Create Expense model</button>
                 </div>
-            </div >
+
+            </div>
+            <div className="categoryContainer">
+                {
+                    list.map((single, index) => {
+                        return (
+                            <Category single={single} list={list} key={single._id} setlist={setlist} tempBudget={tempBudget} setTempBudget={setTempBudget} />
+                        )
+                    })
+                }
+            </div>
         </div>
+
     )
 }
 

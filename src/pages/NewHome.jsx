@@ -9,9 +9,13 @@ import LineGraph from '../Components/Graph/LineGraph'
 import CategoryCurrentAmountBarChart from '../Components/Graph/CategoryCurrentAmountBarChart'
 import TransactionModal from '../Components/Transactions/TransactionModal'
 import { useGlobalDataContext } from '../Contexts/DataContext';
+import { Form } from 'react-router-dom'
 
 const NewHome = () => {
-    const { showModal } = useGlobalDataContext()
+    const { showModal, expense } = useGlobalDataContext()
+    // if (expense.length === 0) {
+    //     return <Form />
+    // }
     return (
         <div className='newHomeContainer'>
             <div className="newSidebar">
